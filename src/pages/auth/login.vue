@@ -9,14 +9,15 @@
 
 <script setup lang="ts">
 import { toast } from '@/components/ui/toast'
+import { emailSchema, passwordSchema } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { RouterLink } from 'vue-router'
 import z from 'zod'
 
 const formSchema = toTypedSchema(z.object({
-  email: z.string({ message: 'Vui lòng nhập email' }).min(2).max(50),
-  password: z.string(),
+  email: emailSchema,
+  password: passwordSchema,
 }))
 
 const form = useForm({
@@ -47,17 +48,19 @@ const onSubmit = form.handleSubmit((values) => {
           <div class="grid gap-2">
             <InputValidator id="email" label="Email" placeholder="m@gmai.com" name="email" />
             <div class="grid gap-2">
-              <InputValidator id="password" type="password" label="Password" name="password" />
+              <InputValidator id="password" type="password" placeholder="Password" label="Password" name="password" />
               <RouterLink to="/forgot-password" class="ml-auto text-sm underline">
                 Forgot your password?
               </RouterLink>
             </div>
-            <Button type="submit" class="w-full">
+            <Button type="submit">
               Login
             </Button>
-            <Button variant="outline" class="w-full">
-              Login with Google
-            </Button>
+            <RouterLink to="/">
+              <Button type="button" variant="outline" class="w-full">
+                Login with Google
+              </Button>
+            </RouterLink>
           </div>
           <div class="mt-4 text-center text-sm">
             Don't have an account?
