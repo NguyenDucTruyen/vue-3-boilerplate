@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <header>
+    <header class="header">
       <h1>My Default Layout</h1>
     </header>
     <main>
@@ -16,10 +16,8 @@
 </template>
 
 <style scoped>
-header {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    text-align: center;
+.header {
+  @apply bg-background p-4;
 }
 
 main {
@@ -27,7 +25,6 @@ main {
 }
 
 footer {
-    background-color: #f8f9fa;
     padding: 1rem;
     text-align: center;
     position: fixed;

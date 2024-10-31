@@ -33,18 +33,18 @@ const onSubmit = form.handleSubmit((values) => {
 </script>
 
 <template>
-  <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-    <form @submit="onSubmit">
-      <div class="flex items-center justify-center py-12">
-        <div class="mx-auto grid w-[350px] gap-6">
-          <div class="grid gap-2 text-center">
-            <h1 class="text-3xl font-bold">
-              Login
-            </h1>
-            <p class="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
-          </div>
+  <form @submit="onSubmit">
+    <Card class="mx-auto max-w-sm">
+      <CardHeader>
+        <CardTitle class="text-2xl">
+          Login
+        </CardTitle>
+        <CardDescription>
+          Enter your email below to login to your account
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div class="grid gap-4">
           <div class="grid gap-2">
             <InputValidator id="email" label="Email" placeholder="m@gmai.com" name="email" />
             <div class="grid gap-2">
@@ -53,30 +53,23 @@ const onSubmit = form.handleSubmit((values) => {
                 Forgot your password?
               </RouterLink>
             </div>
-            <Button type="submit">
-              Login
+          </div>
+          <Button type="submit">
+            Login
+          </Button>
+          <RouterLink to="/">
+            <Button type="button" variant="outline" class="w-full">
+              Login with Google
             </Button>
-            <RouterLink to="/">
-              <Button type="button" variant="outline" class="w-full">
-                Login with Google
-              </Button>
-            </RouterLink>
-          </div>
-          <div class="mt-4 text-center text-sm">
-            Don't have an account?
-            <a href="#" class="underline">
-              Sign up
-            </a>
-          </div>
+          </RouterLink>
         </div>
-      </div>
-    </form>
-    <div class="hidden bg-muted lg:block">
-      <img
-        src="https://www.shadcn-vue.com/placeholder.svg"
-        alt="Image"
-        class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-      >
-    </div>
-  </div>
+        <div class="mt-4 text-center text-sm">
+          Don't have an account?
+          <RouterLink to="/auth/signup" class="underline">
+            Sign up
+          </RouterLink>
+        </div>
+      </CardContent>
+    </Card>
+  </form>
 </template>

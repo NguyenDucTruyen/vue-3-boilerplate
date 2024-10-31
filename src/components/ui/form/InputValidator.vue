@@ -32,8 +32,14 @@ const props = withDefaults(defineProps<InputProps>(), {
           :placeholder="props.placeholder"
           v-bind="componentField"
         />
-        <FormMessage />
+        <FormMessage class="error-message" />
       </FormControl>
     </FormItem>
   </FormField>
 </template>
+
+<style scoped>
+  .error-message {
+    margin-top: 4px !important;
+  }
+</style>

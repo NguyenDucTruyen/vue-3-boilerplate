@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import Toaster from '@/components/ui/toast/Toaster.vue'
+import { useThemeStore } from '@/stores/theme'
+
+useThemeStore()
 </script>
 
 <template>
   <router-view v-slot="{ Component, route }">
     <transition name="slide">
-      <div :key="route.name">
-        <component :is="Component" />
-      </div>
+      <component :is="Component" :key="route.name" />
     </transition>
   </router-view>
   <Toaster />
 </template>
-
-<style scoped>
-</style>
