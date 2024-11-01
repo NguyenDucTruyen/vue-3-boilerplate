@@ -7,8 +7,8 @@ import './utils/zodLocale'
 
 const app = createApp(App)
 
-app.use(createPinia())
 app
+  .use(createPinia())
   .use(router)
 
 router.isReady().then(() => {
