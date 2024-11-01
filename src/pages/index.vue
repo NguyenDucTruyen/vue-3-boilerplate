@@ -33,4 +33,7 @@ function clear() {
   <Button @click="clear">
     Clear
   </Button>
+  <br>
+  <Icon name="IconBack" class="w-10 h-10 text-border" />
+  <Icon name="IconPlus" class="w-10 h-10 text-primary" />
 </template>

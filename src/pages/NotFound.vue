@@ -11,12 +11,11 @@
   <div class="error-page">
     <h1>Page not found.</h1>
     <p>
-      This page may be private. If someone gave you this link, you may need to be a board or
-      Workspace member to access it.
+      The page you are looking for does not exist.
     </p>
     <router-link to="/">
       <Button>
-        Back to Home
+        Go Back
       </Button>
     </router-link>
   </div>
