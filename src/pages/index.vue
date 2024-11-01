@@ -7,6 +7,9 @@ function showtoast() {
     description: 'This is a toast message from the Home Page',
   })
 }
+function clear() {
+  localStorage.removeItem('accesstoken')
+}
 </script>
 
 <template>
@@ -18,8 +21,16 @@ function showtoast() {
       Go to Sign In
     </Button>
   </RouterLink>
+  <RouterLink to="/project">
+    <Button>
+      Go to Register
+    </Button>
+  </RouterLink>
   <br>
   <ModeToggle />
   <br>
   <ColorSelect />
+  <Button @click="clear">
+    Clear
+  </Button>
 </template>

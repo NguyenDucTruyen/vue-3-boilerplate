@@ -1,15 +1,12 @@
 import { apiLogin, apiRegister } from '@/api/auth'
 import { defineStore } from 'pinia'
+import { useUserStore } from './user'
 
 export const useAuthStore = defineStore('auth', () => {
   const accessToken = ref(localStorage.getItem('accesstoken') || '')
-
+  const userStore = useUserStore()
   const isAuthenticated = computed(() => !!accessToken.value)
-
-  function setAccessToken(token: string) {
-    localStorage.setItem('accesstoken', token)
-    accessToken.value = token
-  }
+  const router = useRouter()
 
   function login(credentials: { email: string, password: string }) {
     return apiLogin(credentials)
@@ -17,6 +14,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   function logout() {
     localStorage.removeItem('accesstoken')
+    userStore.removeUser()
+    router.push('/auth/login')
     accessToken.value = ''
   }
 
@@ -29,6 +28,5 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     register,
-    setAccessToken,
   }
 })

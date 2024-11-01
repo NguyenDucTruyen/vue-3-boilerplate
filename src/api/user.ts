@@ -1,6 +1,8 @@
 import { $get } from '@/api/axios'
 
-export function fetchUserData() {
-  return { data: { id: 1, name: 'John Doe' } }
+export async function fetchUserData() {
+  return { data: true }
+  // return await Promise.reject(new Error('Not implemented'))
+
   return $get('/user')
 }

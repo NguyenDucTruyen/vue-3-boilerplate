@@ -1,23 +1,28 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { fetchUserData } from '@/api/user'
+import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/user'
 
 export async function middlewareAuth(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
+  const authStore = useAuthStore()
   const userStore = useUserStore()
-  if (!localStorage.getItem('accesstoken')) {
-    if (to.meta.layout === 'auth') {
-      return next()
-    }
-    if (to.meta.layout !== 'error') {
-      return next('/auth/login')
-    }
+  const accessToken = localStorage.getItem('accesstoken')
+
+  if (!accessToken) {
+    userStore.removeUser()
+    const isAuthOrErrorLayout = ['auth', 'error'].includes(to.meta.layout as string)
+    return isAuthOrErrorLayout ? next() : next('/auth/login')
   }
+
   if (!userStore.isAuthenticated) {
-    const response = await fetchUserData()
-    userStore.setUser(response.data)
-  }
-  if (to.meta.layout === 'auth') {
-    return next('/')
+    try {
+      const response = await fetchUserData()
+      userStore.setUser(response.data)
+    }
+    catch (error) {
+      console.error('Error fetching user data:', error)
+      authStore.logout()
+    }
   }
   return next()
 }

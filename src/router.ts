@@ -1,4 +1,4 @@
-import { middlewareAuth } from '@/middlewares'
+import { middlewareAuth, middlewareLayout } from '@/middlewares'
 import generatedRoutes from '~pages'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -16,6 +16,7 @@ router.beforeEach(async (to, from, next) => {
   return next()
 })
 router.beforeEach(middlewareAuth)
+router.beforeEach(middlewareLayout)
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
