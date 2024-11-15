@@ -8,10 +8,31 @@
 </route>
 
 <script setup lang="ts">
+import { toast } from '@/components/ui/toast'
+import { useAuthStore } from '@/stores/auth'
+import { signupSchema } from '@/utils/validation'
+import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+const form = useForm({
+  validationSchema: toTypedSchema(signupSchema),
+})
+
+const onSubmit = form.handleSubmit(async (values) => {
+  await authStore.register(values)
+  toast({
+    title: 'Success',
+    description: 'Account created successfully',
+  })
+  router.push('/auth/login')
+})
 </script>
 
 <template>
-  <form class="rounded-lg border bg-card text-card-foreground shadow-sm mx-auto max-w-sm h-max">
+  <form class="rounded-lg border bg-card text-card-foreground shadow-sm mx-auto max-w-sm h-max" @submit.prevent="onSubmit">
     <CardHeader>
       <CardTitle class="text-xl">
         Sign Up
@@ -22,23 +43,17 @@
     </CardHeader>
     <CardContent>
       <div class="grid gap-4">
-        <div class="grid gap-2">
-          <Label for="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="m@example.com"
-            required
-          />
-        </div>
-        <div class="grid gap-2">
-          <Label for="password">Password</Label>
-          <Input id="password" placeholder="Password" type="password" />
-        </div>
-        <div class="grid gap-2">
-          <Label for="password">Confirm Password</Label>
-          <Input id="passwordcf" placeholder="Confirm Password" type="password" />
-        </div>
+        <InputValidator
+          id="email"
+          type="email"
+          label="Email"
+          placeholder="m@example.com"
+          required
+          name="email"
+        />
+        <InputValidator id="password" label="Password" placeholder="Password" type="password" name="password" />
+        <InputValidator id="confirmPassword" label="Confirm password" placeholder="Confirm Password" type="password" name="confirmPassword" />
+
         <Button type="submit" class="w-full">
           Create an account
         </Button>

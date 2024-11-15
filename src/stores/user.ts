@@ -1,3 +1,4 @@
+import { fetchUserData } from '@/api/user'
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
@@ -9,11 +10,16 @@ export const useUserStore = defineStore('user', () => {
   function removeUser() {
     user.value = null
   }
+  async function getUserData() {
+    const data = await fetchUserData()
+    setUser(data)
+  }
   const isAuthenticated = computed(() => !!user.value)
   return {
     user,
     setUser,
     isAuthenticated,
-    removeUser
+    removeUser,
+    getUserData
   }
 })

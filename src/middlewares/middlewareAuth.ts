@@ -11,13 +11,15 @@ export async function middlewareAuth(to: RouteLocationNormalized, from: RouteLoc
   if (!accessToken) {
     userStore.removeUser()
     const isAuthOrErrorLayout = ['auth', 'error'].includes(to.meta.layout as string)
-    return isAuthOrErrorLayout ? next() : next('/auth/login')
+    if (isAuthOrErrorLayout)
+      return next()
+    authStore.setReturnUrl(to.fullPath)
+    return next('/auth/login')
   }
 
   if (!userStore.isAuthenticated) {
     try {
-      const response = await fetchUserData()
-      userStore.setUser(response.data)
+      await userStore.getUserData()
     }
     catch (error) {
       console.error('Error fetching user data:', error)

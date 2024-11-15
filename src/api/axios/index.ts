@@ -54,23 +54,28 @@ axiosInstance.interceptors.response.use(
   },
 )
 
-function $get(url: string, config = {}) {
-  return axiosInstance.get(url, config)
+async function $get(url: string, config = {}) {
+  const response = await axiosInstance.get(url, config)
+  return response.data
 }
 
-function $post(url: string, data: any, config = {}) {
-  return axiosInstance.post(url, data, config)
+async function $post(url: string, data: any, config = {}) {
+  const response = await axiosInstance.post(url, data, config)
+  return response.data
 }
 
-function $put(url: string, data: any, config = {}) {
-  return axiosInstance.put(url, data, config)
+async function $put(url: string, data: any, config = {}) {
+  const response = await axiosInstance.put(url, data, config)
+  return response.data
 }
-function $patch(url: string, data: any, config = {}) {
-  return axiosInstance.patch(url, data, config)
+async function $patch(url: string, data: any, config = {}) {
+  const response = await axiosInstance.patch(url, data, config)
+  return response.data
 }
 
-function $delete(url: string, config = {}) {
-  return axiosInstance.delete(url, config)
+async function $delete(url: string, config = {}) {
+  const response = await axiosInstance.delete(url, config)
+  return response.data
 }
 
 export { $delete, $get, $patch, $post, $put }

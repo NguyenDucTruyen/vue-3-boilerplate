@@ -8,22 +8,17 @@
   </route>
 
 <script setup lang="ts">
-import { toast } from '@/components/ui/toast'
 import { useAuthStore } from '@/stores/auth'
-import { emailSchema, passwordSchema } from '@/utils/validation'
+import { loginSchema } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { RouterLink } from 'vue-router'
 import z from 'zod'
 
 const authStore = useAuthStore()
-const formSchema = toTypedSchema(z.object({
-  email: emailSchema,
-  password: passwordSchema,
-}))
 
 const form = useForm({
-  validationSchema: formSchema,
+  validationSchema: toTypedSchema(loginSchema),
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
