@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
           return Promise.reject(refreshError)
         }
       }
-      else {
+      else if (!window.location.pathname.includes('/auth/')) {
         window.location.href = '/auth/login'
       }
     }
@@ -55,47 +55,22 @@ axiosInstance.interceptors.response.use(
 )
 
 function $get(url: string, config = {}) {
-  try {
-    return axiosInstance.get(url, config)
-  }
-  catch (error) {
-    return Promise.reject(error)
-  }
+  return axiosInstance.get(url, config)
 }
 
 function $post(url: string, data: any, config = {}) {
-  try {
-    return axiosInstance.post(url, data, config)
-  }
-  catch (error) {
-    return Promise.reject(error)
-  }
+  return axiosInstance.post(url, data, config)
 }
 
 function $put(url: string, data: any, config = {}) {
-  try {
-    return axiosInstance.put(url, data, config)
-  }
-  catch (error) {
-    return Promise.reject(error)
-  }
+  return axiosInstance.put(url, data, config)
 }
 function $patch(url: string, data: any, config = {}) {
-  try {
-    return axiosInstance.patch(url, data, config)
-  }
-  catch (error) {
-    return Promise.reject(error)
-  }
+  return axiosInstance.patch(url, data, config)
 }
 
 function $delete(url: string, config = {}) {
-  try {
-    return axiosInstance.delete(url, config)
-  }
-  catch (error) {
-    return Promise.reject(error)
-  }
+  return axiosInstance.delete(url, config)
 }
 
 export { $delete, $get, $patch, $post, $put }

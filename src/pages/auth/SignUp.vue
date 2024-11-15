@@ -1,17 +1,17 @@
 <route>
-    {
-        meta: {
-            title: "Sign Up",
-            layout: "auth",
-        }
-    }
+  {
+      meta: {
+          title: "Sign Up",
+          layout: "auth",
+      }
+  }
 </route>
 
 <script setup lang="ts">
 </script>
 
 <template>
-  <Card class="mx-auto max-w-sm h-max">
+  <form class="rounded-lg border bg-card text-card-foreground shadow-sm mx-auto max-w-sm h-max">
     <CardHeader>
       <CardTitle class="text-xl">
         Sign Up
@@ -22,16 +22,6 @@
     </CardHeader>
     <CardContent>
       <div class="grid gap-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="grid gap-2">
-            <Label for="first-name">First name</Label>
-            <Input id="first-name" placeholder="Max" required />
-          </div>
-          <div class="grid gap-2">
-            <Label for="last-name">Last name</Label>
-            <Input id="last-name" placeholder="Robinson" required />
-          </div>
-        </div>
         <div class="grid gap-2">
           <Label for="email">Email</Label>
           <Input
@@ -43,13 +33,14 @@
         </div>
         <div class="grid gap-2">
           <Label for="password">Password</Label>
-          <Input id="password" type="password" />
+          <Input id="password" placeholder="Password" type="password" />
+        </div>
+        <div class="grid gap-2">
+          <Label for="password">Confirm Password</Label>
+          <Input id="passwordcf" placeholder="Confirm Password" type="password" />
         </div>
         <Button type="submit" class="w-full">
           Create an account
-        </Button>
-        <Button variant="outline" class="w-full">
-          Sign up with GitHub
         </Button>
       </div>
       <div class="mt-4 text-center text-sm">
@@ -59,5 +50,5 @@
         </RouterLink>
       </div>
     </CardContent>
-  </Card>
+  </form>
 </template>

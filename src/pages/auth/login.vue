@@ -1,20 +1,22 @@
 <route>
-{
-    meta: {
-    layout: "auth",
-    title: "Login",
-    }
-}
-</route>
+  {
+      meta: {
+      layout: "auth",
+      title: "Login",
+      }
+  }
+  </route>
 
 <script setup lang="ts">
 import { toast } from '@/components/ui/toast'
+import { useAuthStore } from '@/stores/auth'
 import { emailSchema, passwordSchema } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { RouterLink } from 'vue-router'
 import z from 'zod'
 
+const authStore = useAuthStore()
 const formSchema = toTypedSchema(z.object({
   email: emailSchema,
   password: passwordSchema,
@@ -24,16 +26,13 @@ const form = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = form.handleSubmit((values) => {
-  toast({
-    title: 'You submitted the following values:',
-    description: JSON.stringify(values, null, 2),
-  })
+const onSubmit = form.handleSubmit(async (values) => {
+  authStore.login(values)
 })
 </script>
 
 <template>
-  <form @submit="onSubmit">
+  <form @submit.prevent="onSubmit">
     <Card class="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle class="text-2xl">
@@ -57,11 +56,6 @@ const onSubmit = form.handleSubmit((values) => {
           <Button type="submit">
             Login
           </Button>
-          <RouterLink to="/">
-            <Button type="button" variant="outline" class="w-full">
-              Login with Google
-            </Button>
-          </RouterLink>
         </div>
         <div class="mt-4 text-center text-sm">
           Don't have an account?
