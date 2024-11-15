@@ -5,9 +5,9 @@ useThemeStore()
 </script>
 
 <template>
-  <router-view v-slot="{ Component, route }">
+  <router-view v-slot="{ Component }">
     <transition name="slide">
-      <component :is="Component" :key="route.name" />
+      <component :is="Component"/>
     </transition>
   </router-view>
   <Toaster />
