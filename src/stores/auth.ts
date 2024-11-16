@@ -1,4 +1,5 @@
-import { apiLogin, apiRegister } from '@/api/auth'
+import type { EmailData, LoginData, RegisterData, ResetPasswordData } from '@/utils/types'
+import { apiLogin, apiRegister, forgotPassword, requestResetPassword } from '@/api/auth'
 import { defineStore } from 'pinia'
 import { useUserStore } from './user'
 
@@ -9,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
   const returnUrl = ref('')
 
-  async function login(credentials: { email: string, password: string }) {
+  async function login(credentials: LoginData) {
     const data = await apiLogin(credentials)
     localStorage.setItem('accesstoken', data.token)
     await userStore.getUserData()
@@ -23,13 +24,20 @@ export const useAuthStore = defineStore('auth', () => {
     accessToken.value = ''
   }
 
-  function register(credentials: { email: string, password: string }) {
+  function register(credentials: RegisterData) {
     return apiRegister(credentials)
   }
+
   function setReturnUrl(url: string) {
     returnUrl.value = url
   }
 
+  function sendEmailResetPassword(data: EmailData) {
+    return forgotPassword(data)
+  }
+  function resetPassword(data: ResetPasswordData) {
+    return requestResetPassword(data)
+  }
   return {
     isAuthenticated,
     login,
@@ -38,5 +46,7 @@ export const useAuthStore = defineStore('auth', () => {
     returnUrl,
     accessToken,
     setReturnUrl,
+    resetPassword,
+    sendEmailResetPassword,
   }
 })
