@@ -35,6 +35,7 @@ const typeInputComputed = computed(() => {
             :placeholder="props.placeholder"
             v-bind="componentField"
             class="pr-9"
+            autocomplete="off"
           />
           <div
             v-if="props.type === 'password'"
