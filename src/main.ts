@@ -12,7 +12,7 @@ app
   .use(createPinia())
   .use(router)
   .use(vue3GoogleLogin, {
-    clientId: '721536480154-rno70blah5lsqdqncbtak8oe4f2shsq4.apps.googleusercontent.com',
+    clientId: import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID as string,
   })
 
 router.isReady().then(() => {
