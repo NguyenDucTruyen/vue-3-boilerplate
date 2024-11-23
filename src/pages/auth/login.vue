@@ -8,12 +8,13 @@
   </route>
 
 <script setup lang="ts">
+import type { CallbackTypes } from 'vue3-google-login'
 import { useAuthStore } from '@/stores/auth'
 import { loginValidator } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { RouterLink } from 'vue-router'
-import { decodeCredential, GoogleLogin, googleOneTap, googleTokenLogin } from 'vue3-google-login'
+import { GoogleLogin } from 'vue3-google-login'
 
 import z from 'zod'
 
@@ -26,9 +27,8 @@ const form = useForm({
 const onSubmit = form.handleSubmit(async (values) => {
   authStore.login(values)
 })
-function callback(response) {
-  const userData = decodeCredential(response.credential)
-  console.log('Handle the response', userData)
+const callback: CallbackTypes.TokenResponseCallback = (response) => {
+  console.log('Access token:', response.access_token)
 }
 </script>
 
@@ -65,7 +65,7 @@ function callback(response) {
           </RouterLink>
         </div>
         <Separator label="Or" style-label="bg-transparent" class="my-4" />
-        <GoogleLogin :callback="callback" class="w-full" prompt auto-login>
+        <GoogleLogin :callback="callback" class="w-full" popup-type="TOKEN">
           <Button type="button" class="w-full">
             <Icon name="IconGoogle" class="w-8 h-8" />
             Login with Google
