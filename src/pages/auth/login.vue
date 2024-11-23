@@ -13,6 +13,8 @@ import { loginValidator } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { RouterLink } from 'vue-router'
+import { decodeCredential, GoogleLogin, googleOneTap, googleTokenLogin } from 'vue3-google-login'
+
 import z from 'zod'
 
 const authStore = useAuthStore()
@@ -24,6 +26,10 @@ const form = useForm({
 const onSubmit = form.handleSubmit(async (values) => {
   authStore.login(values)
 })
+function callback(response) {
+  const userData = decodeCredential(response.credential)
+  console.log('Handle the response', userData)
+}
 </script>
 
 <template>
@@ -58,7 +64,14 @@ const onSubmit = form.handleSubmit(async (values) => {
             Sign up
           </RouterLink>
         </div>
-      </CardContent>
+        <Separator label="Or" style-label="bg-transparent" class="my-4" />
+        <GoogleLogin :callback="callback" class="w-full" prompt auto-login>
+          <Button type="button" class="w-full">
+            <Icon name="IconGoogle" class="w-8 h-8" />
+            Login with Google
+          </Button>
+        </GoogleLogin>
+      </cardcontent>
     </Card>
   </form>
 </template>
