@@ -4,4 +4,7 @@ export default antfu({
   // stylistic: true, // enable stylistic formatting rules
   typescript: true,
   vue: true,
+  rules: {
+    'no-console':'warn'
+  }
 })
