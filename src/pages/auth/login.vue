@@ -12,20 +12,22 @@ import type { CallbackTypes } from 'vue3-google-login'
 import { useAuthStore } from '@/stores/auth'
 import { loginValidator } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
+import { useAsyncState } from '@vueuse/core'
 import { useForm } from 'vee-validate'
 import { RouterLink } from 'vue-router'
 import { GoogleLogin } from 'vue3-google-login'
 
-import z from 'zod'
-
 const authStore = useAuthStore()
-
 const form = useForm({
   validationSchema: toTypedSchema(loginValidator),
 })
 
+const { isLoading, execute } = useAsyncState(authStore.login, null, {
+  immediate: false,
+})
+
 const onSubmit = form.handleSubmit(async (values) => {
-  authStore.login(values)
+  execute(0, values)
 })
 const callback: CallbackTypes.TokenResponseCallback = (response) => {
   console.log('Access token:', response.access_token)
@@ -54,7 +56,10 @@ const callback: CallbackTypes.TokenResponseCallback = (response) => {
               </RouterLink>
             </div>
           </div>
-          <Button type="submit">
+          <Button
+            type="submit"
+            :is-loading="isLoading"
+          >
             Login
           </Button>
         </div>
