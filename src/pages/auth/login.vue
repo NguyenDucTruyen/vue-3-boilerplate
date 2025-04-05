@@ -24,10 +24,13 @@ const form = useForm({
 
 const { isLoading, execute } = useAsyncState(authStore.login, null, {
   immediate: false,
+  onError: (error) => {
+    Promise.reject(error)
+  },
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
-  execute(0, values)
+  await execute(0, values)
 })
 const callback: CallbackTypes.TokenResponseCallback = (response) => {
   console.log('Access token:', response.access_token)
