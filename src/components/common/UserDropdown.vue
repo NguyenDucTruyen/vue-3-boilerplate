@@ -1,15 +1,22 @@
-<script setup>
+<script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
-import { useThemeStore } from '@/stores/theme'
 import { useUserStore } from '@/stores/user'
 
 const authStore = useAuthStore()
 const userStore = useUserStore()
-const themeStore = useThemeStore()
 
-function handleChange(value) {
-  themeStore.setTheme(value ? 'dark' : 'light')
+const isDarkMode = ref(localStorage.getItem('dark') === 'true')
+function handleChange(value: boolean) {
+  isDarkMode.value = value
+  localStorage.setItem('dark', String(value))
 }
+watch(
+  isDarkMode,
+  (value) => {
+    document.body.classList.toggle('dark', value)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
