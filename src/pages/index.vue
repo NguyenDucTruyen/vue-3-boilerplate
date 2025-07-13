@@ -10,17 +10,15 @@ function showtoast() {
 </script>
 
 <template>
-  <Button @click="showtoast">
-    Click me
-  </Button>
-  <RouterLink to="/project">
-    <Button>
-      Go to project
+  <div class="flex flex-col items-center justify-center gap-2">
+    <h3
+      class="text-2xl font-bold text-center mt-4"
+    >
+      Welcome to the Home Page
+    </h3>
+    <Button class="px-2 py-1 text-white rounded" @click="showtoast">
+      Show Toast
     </Button>
-  </RouterLink>
-  <br>
-  <ColorSelect />
-  <br>
-  <Icon name="IconBack" class="w-10 h-10 text-primary" />
-  <Icon name="IconPlus" class="w-10 h-10 text-primary" />
+    <ColorSelect />
+  </div>
 </template>
