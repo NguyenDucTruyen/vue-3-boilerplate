@@ -1,7 +1,16 @@
 import type { ColorsType, ThemeType } from '@/types/theme-type'
+import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useThemeStore = defineStore('themeStore', () => {
+interface IThemeStore {
+  theme: Ref<ThemeType>
+  color: Ref<ColorsType>
+  setTheme: (newTheme: ThemeType) => void
+  setColor: (newColor: ColorsType) => void
+  toggleTheme: () => void
+}
+
+export const useThemeStore = defineStore('themeStore', (): IThemeStore => {
   const themeLocal = localStorage.getItem('theme') || 'light'
   const colorsLocal = localStorage.getItem('color') || 'zinc'
 

@@ -1,9 +1,22 @@
 import type { EmailData, LoginData, RegisterData, ResetPasswordData } from '@/utils/types'
+import type { Ref } from 'vue'
 import { apiLogin, apiRegister, forgotPassword, requestResetPassword } from '@/api/auth'
 import { defineStore } from 'pinia'
 import { useUserStore } from './user'
 
-export const useAuthStore = defineStore('auth', () => {
+interface IAuthStore {
+  isAuthenticated: Ref<boolean>
+  login: (credentials: LoginData) => Promise<void>
+  logout: () => void
+  register: (credentials: RegisterData) => Promise<void>
+  returnUrl: Ref<string>
+  accessToken: Ref<string>
+  setReturnUrl: (url: string) => void
+  resetPassword: (data: ResetPasswordData) => Promise<void>
+  sendEmailResetPassword: (data: EmailData) => Promise<void>
+}
+
+export const useAuthStore = defineStore('auth', (): IAuthStore => {
   const accessToken = ref(localStorage.getItem('accesstoken') || '')
   const userStore = useUserStore()
   const isAuthenticated = computed(() => !!accessToken.value)

@@ -1,7 +1,16 @@
+import type { Ref } from 'vue'
 import { fetchUserData } from '@/api/user'
 import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user', () => {
+interface IUserStore {
+  user: Ref<any>
+  setUser: (newUser: any) => void
+  removeUser: () => void
+  getUserData: () => Promise<void>
+  isAuthenticated: Ref<boolean>
+}
+
+export const useUserStore = defineStore('user', (): IUserStore => {
   const user = ref(null)
 
   function setUser(newUser: any) {
@@ -20,6 +29,6 @@ export const useUserStore = defineStore('user', () => {
     setUser,
     isAuthenticated,
     removeUser,
-    getUserData
+    getUserData,
   }
 })
