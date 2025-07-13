@@ -3,6 +3,7 @@ import UserDropdown from '@/components/common/UserDropdown.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { useSidebarStore } from '@/stores/sidebar'
 import { useUserStore } from '@/stores/user'
+import InputSearch from '../common/InputSearch.vue'
 
 const userStore = useUserStore()
 const sidebarStore = useSidebarStore()
@@ -37,7 +38,14 @@ onMounted(() => {
       >
         <Icon name="IconMenu" class="w-6 h-6 text-foreground" />
       </div>
-      <div class="relative w-full max-w-sm items-center ml-3 lg:ml-8">
+      <InputSearch
+        ref="input-search"
+        v-model="searchValue"
+        placeholder="Search..."
+        @focus="handleNavigate"
+        @change="handleUpdateQuery"
+      />
+      <!-- <div class="relative w-full max-w-sm items-center ml-3 lg:ml-8">
         <input
           id="search"
           ref="input-search"
@@ -54,12 +62,12 @@ onMounted(() => {
         >
           <Icon name="IconSearch" class="w-4 text-black" />
         </span>
-      </div>
+      </div> -->
     </div>
     <div class="flex">
       <UserDropdown v-if="userStore?.user" />
       <template v-else>
-        <router-link to="/auth/register">
+        <router-link to="/auth/singup">
           <Button class="rounded-full px-6" variant="ghost">
             Sign up
           </Button>
