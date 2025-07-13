@@ -31,12 +31,14 @@ onMounted(() => {
 <template>
   <div class="flex items-center justify-between w-full h-full gap-2 p-2 lg:pr-8 bg-card">
     <div class="flex gap-2">
+      <img src="@/assets/images/Logo_Slooh.png" class="w-10 h-10 lg:hidden" alt="">
       <div
         class="lg:hidden p-2 hover:bg-muted cursor-pointer rounded-md"
         variant="ghost"
         @click="sidebarStore.toggle()"
       >
-        <Icon name="IconMenu" class="w-6 h-6 text-foreground" />
+        <Icon v-if="sidebarStore.isOpen" name="IconMenuClose" class="w-6 h-6 text-foreground" />
+        <Icon v-else name="IconMenuOpen" class="w-6 h-6 text-foreground" />
       </div>
       <InputSearch
         ref="input-search"

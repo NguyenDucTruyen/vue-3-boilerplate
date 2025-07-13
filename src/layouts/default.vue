@@ -4,6 +4,7 @@
       class="flex w-full h-full"
     >
       <AppSideBar class="max-lg:hidden" />
+      <AppSideBarMobile class="lg:hidden" />
       <div class="flex flex-col h-full w-full lg:[width:calc(100%-15rem)]">
         <header class="flex h-16 items-center">
           <AppHeader />
