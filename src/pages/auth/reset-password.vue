@@ -8,8 +8,8 @@
 </route>
 
 <script setup lang="ts">
-import { toast } from '@/components/ui/toast'
 import { useAuthStore } from '@/stores/auth'
+import { showSuccess } from '@/utils/toast'
 import { resetPasswordValidator } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAsyncState } from '@vueuse/core'
@@ -34,13 +34,10 @@ const { isLoading, execute, error } = useAsyncState(authStore.resetPassword, nul
   },
 })
 const onSubmit = form.handleSubmit(async (values) => {
-  await await execute(0, values)
+  await execute(0, values)
   if (error.value)
     return
-  toast({
-    title: 'Thành công',
-    description: 'Mật khẩu đã được đặt lại thành công',
-  })
+  showSuccess('Password reset successfully!')
   router.push('/auth/login')
 })
 </script>

@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { toast } from '@/components/ui/toast'
-
-function showtoast() {
-  toast({
-    title: 'Hello from the Home Page',
-    description: 'This is a toast message from the Home Page',
-  })
-}
+import { showDefault, showError, showInfo, showSuccess, showWarning } from '@/utils/toast'
 </script>
 
 <template>
@@ -16,9 +9,24 @@ function showtoast() {
     >
       Welcome to the Home Page
     </h3>
-    <Button class="px-2 py-1 text-white rounded" @click="showtoast">
-      Show Toast
-    </Button>
+    <div class="flex gap-2">
+      <Button class="px-2 py-1 text-white rounded" @click="showSuccess('Success message!')">
+        Show Toast success
+      </Button>
+      <Button
+        class="px-2 py-1 text-white rounded"
+        variant="destructive"
+        @click="showError('error message!')"
+      >
+        Show Toast error
+      </Button>
+      <Button class="px-2 py-1 text-white rounded" @click="showWarning('warning message!')">
+        Show Toast warning
+      </Button>
+      <Button class="px-2 py-1 text-white rounded" @click="showInfo('info message!')">
+        Show Toast info
+      </Button>
+    </div>
     <ColorSelect />
   </div>
 </template>

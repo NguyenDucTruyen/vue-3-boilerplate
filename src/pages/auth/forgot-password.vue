@@ -8,7 +8,6 @@
 </route>
 
 <script setup lang="ts">
-import { toast } from '@/components/ui/toast'
 import { useAuthStore } from '@/stores/auth'
 import { emailValidator } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -34,10 +33,7 @@ const onSubmit = form.handleSubmit(async (values) => {
   await execute(0, values)
   if (error.value)
     return
-  toast({
-    title: 'Thành công',
-    description: 'Đã gửi email đặt lại mật khẩu, vui lòng kiểm tra email của bạn',
-  })
+  
   router.push('/auth/reset-password')
 })
 </script>

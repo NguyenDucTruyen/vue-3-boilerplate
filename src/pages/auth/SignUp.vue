@@ -8,8 +8,8 @@
 </route>
 
 <script setup lang="ts">
-import { toast } from '@/components/ui/toast'
 import { useAuthStore } from '@/stores/auth'
+import { showSuccess } from '@/utils/toast'
 import { signupValidator } from '@/utils/validation'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
@@ -23,10 +23,7 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   await authStore.register(values)
-  toast({
-    title: 'Success',
-    description: 'Account created successfully',
-  })
+  showSuccess('Account created successfully')
   router.push('/auth/login')
 })
 </script>
