@@ -29,7 +29,7 @@ export default defineConfig({
     vueJsx(),
     Components({ dts: true }),
     Pages(),
-    Layouts(),
+    Layouts({ layoutsDirs: 'src/components/layouts' }),
     svgLoader(),
   ],
   resolve: {

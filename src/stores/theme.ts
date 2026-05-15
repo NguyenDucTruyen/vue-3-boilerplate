@@ -1,6 +1,8 @@
-import type { ColorsType, ThemeType } from '@/types/theme-type'
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
+
+export type ColorsType = 'zinc' | 'rose' | 'blue' | 'green' | 'orange'
+export type ThemeType = 'light' | 'dark' | 'system'
 
 interface IThemeStore {
   theme: Ref<ThemeType>
