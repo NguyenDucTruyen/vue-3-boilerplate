@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ROUTES } from '@/shared/constants/routes'
 import { showSuccess } from '@/shared/lib/toast'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
@@ -15,7 +16,7 @@ const form = useForm({
 const onSubmit = form.handleSubmit(async (values) => {
   await authStore.register(values)
   showSuccess('Account created successfully')
-  router.push('/auth/login')
+  router.push(ROUTES.AUTH.LOGIN)
 })
 </script>
 

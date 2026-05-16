@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ROUTES } from '@/shared/constants/routes'
 import { showSuccess } from '@/shared/lib/toast'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAsyncState } from '@vueuse/core'
@@ -29,7 +30,7 @@ const onSubmit = form.handleSubmit(async (values) => {
   if (error.value)
     return
   showSuccess('Password reset successfully!')
-  router.push('/auth/login')
+  router.push(ROUTES.AUTH.LOGIN)
 })
 </script>
 

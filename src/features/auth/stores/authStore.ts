@@ -1,6 +1,8 @@
 import type { Ref } from 'vue'
 import type { EmailData, LoginData, RegisterData, ResetPasswordData } from '../types/auth.types'
-import { useUserStore } from '@/entities/user/stores/userStore'
+import { ROUTES } from '@/shared/constants/routes'
+import { STORAGE_KEYS } from '@/shared/constants/storageKeys'
+import { useUserStore } from '@/shared/stores/userStore'
 import { defineStore } from 'pinia'
 import { apiLogin, apiRegister, forgotPassword, requestResetPassword } from '../api/authApi'
 
@@ -17,7 +19,7 @@ interface IAuthStore {
 }
 
 export const useAuthStore = defineStore('auth', (): IAuthStore => {
-  const accessToken = ref(localStorage.getItem('accesstoken') || '')
+  const accessToken = ref(localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN) || '')
   const userStore = useUserStore()
   const isAuthenticated = computed(() => !!accessToken.value)
   const router = useRouter()
@@ -25,15 +27,15 @@ export const useAuthStore = defineStore('auth', (): IAuthStore => {
 
   async function login(credentials: LoginData) {
     const data = await apiLogin(credentials)
-    localStorage.setItem('accesstoken', data.token)
+    localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, data.token)
     await userStore.getUserData()
-    router.push(returnUrl.value || '/')
+    router.push(returnUrl.value || ROUTES.HOME)
   }
 
   function logout() {
-    localStorage.removeItem('accesstoken')
+    localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
     userStore.removeUser()
-    router.push('/auth/login')
+    router.push(ROUTES.AUTH.LOGIN)
     accessToken.value = ''
   }
 

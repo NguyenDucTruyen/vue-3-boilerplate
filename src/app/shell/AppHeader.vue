@@ -1,8 +1,7 @@
 <script setup>
-import { useUserStore } from '@/entities/user/stores/userStore'
 import UserDropdown from '@/features/auth/components/UserDropdown.vue'
-import InputSearch from '@/shared/components/common/InputSearch.vue'
 import { useSidebarStore } from '@/shared/stores/sidebarStore'
+import { useUserStore } from '@/shared/stores/userStore'
 import Button from '@/shared/ui/button/Button.vue'
 
 const userStore = useUserStore()

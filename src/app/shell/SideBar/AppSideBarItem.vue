@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from '@/entities/user/stores/userStore'
+import { useUserStore } from '@/shared/stores/userStore'
 
 const props = defineProps({
   icon: String,

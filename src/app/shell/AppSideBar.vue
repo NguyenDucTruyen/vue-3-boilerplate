@@ -1,4 +1,5 @@
 <script setup>
+import { ROUTES } from '@/shared/constants/routes'
 import { HomeIcon } from 'lucide-vue-next'
 import AppSideBarGroup from './SideBar/AppSideBarGroup.vue'
 import AppSideBarItem from './SideBar/AppSideBarItem.vue'
@@ -9,35 +10,35 @@ const data = ref({
       id: 3,
       icon: 'IconListUser',
       title: 'User Management',
-      url: '/admin/user',
+      url: ROUTES.ADMIN.USER,
       name: ['admin-user'],
     },
     {
       id: 2,
       icon: 'IconChannel',
       title: 'Project',
-      url: '/project',
+      url: ROUTES.PROJECT,
       name: ['project'],
     },
     {
       id: 4,
       icon: 'IconPublic',
       title: 'Public Room',
-      url: '/admin/public-room',
+      url: ROUTES.ADMIN.PUBLIC_ROOM,
       name: ['admin-public-room'],
     },
     {
       id: 1,
       icon: HomeIcon,
       title: 'Home',
-      url: '/',
+      url: ROUTES.HOME,
       name: ['index'],
     },
     {
       id: 5,
       icon: 'IconReport',
       title: 'Reports',
-      url: '/admin/reports',
+      url: ROUTES.ADMIN.REPORTS,
       name: ['admin-reports', 'admin-reports-id'],
     },
   ].sort((a, b) => a.id - b.id),

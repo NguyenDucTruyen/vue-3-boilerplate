@@ -28,7 +28,6 @@ export default defineConfig({
     Components({
       dts: true,
       dirs: [
-        'src/app/layouts',
         'src/app/shell',
         'src/features/**/components',
         'src/shared/components',

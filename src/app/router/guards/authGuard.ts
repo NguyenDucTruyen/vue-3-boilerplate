@@ -1,29 +1,41 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
-import { useUserStore } from '@/entities/user/stores/userStore'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { ROUTES } from '@/shared/constants/routes'
+import { STORAGE_KEYS } from '@/shared/constants/storageKeys'
+import { useUserStore } from '@/shared/stores/userStore'
 
-export async function middlewareAuth(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
+export async function middlewareAuth(to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) {
   const authStore = useAuthStore()
   const userStore = useUserStore()
-  const accessToken = localStorage.getItem('accesstoken')
+
+  if (to.meta.title) {
+    document.title = to.meta.title as string
+  }
+
+  const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN)
+  const isPublicRoute = ['auth', 'error'].includes(to.meta.layout as string)
 
   if (!accessToken) {
     userStore.removeUser()
-    const isAuthOrErrorLayout = ['auth', 'error'].includes(to.meta.layout as string)
-    if (isAuthOrErrorLayout)
+    if (isPublicRoute)
       return next()
     authStore.setReturnUrl(to.fullPath)
-    return next('/auth/login')
+    return next(ROUTES.AUTH.LOGIN)
   }
 
   if (!userStore.isAuthenticated) {
     try {
       await userStore.getUserData()
     }
-    catch (error) {
-      console.error('Error fetching user data:', error)
+    catch {
       authStore.logout()
+      return next(false)
     }
   }
+
+  if (to.meta.layout === 'auth') {
+    return next(ROUTES.HOME)
+  }
+
   return next()
 }

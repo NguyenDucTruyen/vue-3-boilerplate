@@ -1,3 +1,6 @@
+import { API_ENDPOINTS } from '@/shared/constants/apiEndpoints'
+import { ROUTES } from '@/shared/constants/routes'
+import { STORAGE_KEYS } from '@/shared/constants/storageKeys'
 import axios from 'axios'
 
 const BASE_URL = import.meta.env.VITE_API_URL
@@ -12,7 +15,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
   config.headers['Content-Type'] = 'application/json'
   config.headers['Access-Control-Allow-Origin'] = '*'
-  const accessToken = localStorage.getItem('Slooh_AccessToken')
+  const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN)
   if (accessToken)
     config.headers.Authorization = `Bearer ${accessToken}`
   return config
@@ -25,16 +28,16 @@ axiosInstance.interceptors.response.use(
 
     if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
-      const refreshToken = localStorage.getItem('Slooh_RefreshToken')
+      const refreshToken = localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN)
 
       if (refreshToken) {
         try {
-          const response = await axios.post(`${BASE_URL}/v1/auth/refresh-tokens`, { refreshToken })
+          const response = await axios.post(`${BASE_URL}/v1${API_ENDPOINTS.AUTH.REFRESH_TOKENS}`, { refreshToken })
           const accessToken = response.data.access.token
           const currentRefreshToken = response.data.refresh.token
 
-          localStorage.setItem('Slooh_AccessToken', accessToken)
-          localStorage.setItem('Slooh_RefreshToken', currentRefreshToken)
+          localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken)
+          localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, currentRefreshToken)
           axiosInstance.defaults.headers.Authorization = `Bearer ${accessToken}`
           originalRequest.headers.Authorization = `Bearer ${accessToken}`
 
@@ -42,14 +45,14 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest)
         }
         catch (refreshError) {
-          localStorage.removeItem('Slooh_AccessToken')
-          localStorage.removeItem('Slooh_RefreshToken')
-          window.location.href = '/auth/login'
+          localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
+          localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN)
+          window.location.href = ROUTES.AUTH.LOGIN
           return Promise.reject(refreshError)
         }
       }
-      else if (!window.location.pathname.includes('/auth/')) {
-        window.location.href = '/auth/login'
+      else if (!window.location.pathname.includes(ROUTES.AUTH.ROOT)) {
+        window.location.href = ROUTES.AUTH.LOGIN
       }
     }
     return Promise.reject(error)

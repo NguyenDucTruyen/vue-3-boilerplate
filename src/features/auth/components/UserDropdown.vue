@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useUserStore } from '@/entities/user/stores/userStore'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { useUserStore } from '@/shared/stores/userStore'
 
 const authStore = useAuthStore()
 const userStore = useUserStore()
