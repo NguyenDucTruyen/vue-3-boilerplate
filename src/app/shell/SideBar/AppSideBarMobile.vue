@@ -1,6 +1,8 @@
 <script setup>
 import { ROUTES } from '@/shared/constants/routes'
 import { useSidebarStore } from '@/shared/stores/sidebarStore'
+import AppSideBarGroup from './AppSideBarGroup.vue'
+import AppSideBarItem from './AppSideBarItem.vue'
 
 const sidebarStore = useSidebarStore()
 const data = ref({

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import ColorSelect from '@/shared/components/ColorSelect.vue'
 import { showError, showInfo, showSuccess, showWarning } from '@/shared/lib/toast'
 import { useConfirmStore } from '@/shared/stores/confirmStore'
+import { Button } from '@/shared/ui/button'
 
 const confirmStore = useConfirmStore()
 </script>

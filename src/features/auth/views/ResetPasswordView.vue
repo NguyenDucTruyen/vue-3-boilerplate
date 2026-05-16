@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ROUTES } from '@/shared/constants/routes'
 import { showSuccess } from '@/shared/lib/toast'
+import { Button } from '@/shared/ui/button'
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card'
+import InputValidator from '@/shared/ui/form/InputValidator.vue'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAsyncState } from '@vueuse/core'
 import { useForm } from 'vee-validate'

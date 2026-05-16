@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { ColorsType } from '@/shared/stores/themeStore'
 import { useThemeStore } from '@/shared/stores/themeStore'
+import { Button } from '@/shared/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu'
 import { ref } from 'vue'
 
 const themeStore = useThemeStore()

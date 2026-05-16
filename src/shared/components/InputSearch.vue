@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import Icon from '@/shared/ui/icon/Icon.vue'
+import { Input } from '@/shared/ui/input'
+
 defineProps<{
   placeholder: string
 }>()

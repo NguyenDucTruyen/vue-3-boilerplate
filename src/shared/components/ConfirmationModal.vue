@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useConfirmStore } from '@/shared/stores/confirmStore'
+import { Button } from '@/shared/ui/button'
 
 const confirmStore = useConfirmStore()
 </script>
@@ -13,12 +14,12 @@ const confirmStore = useConfirmStore()
       <div class="flex flex-col gap-y-2 text-center sm:text-left">
         <h2 class="text-lg font-semibold">
           {{ confirmStore.title }}
-        </h2><p iclass="text-sm text-muted-foreground">
+        </h2><p class="text-sm text-muted-foreground">
           {{ confirmStore.message }}
         </p>
       </div>
       <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-x-2 gap-2">
-        <Button variant="destructive" @click="confirmStore.cancel">
+        <Button variant="outline" @click="confirmStore.cancel">
           {{ confirmStore.cancelText }}
         </Button>
         <Button @click="confirmStore.confirm">

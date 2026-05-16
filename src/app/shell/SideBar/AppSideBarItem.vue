@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '@/shared/stores/userStore'
+import Icon from '@/shared/ui/icon/Icon.vue'
+import UnauthenPopover from './UnauthenPopover.vue'
 
 const props = defineProps({
   icon: String,

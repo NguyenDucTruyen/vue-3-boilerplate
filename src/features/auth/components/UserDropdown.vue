@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import { useUserStore } from '@/shared/stores/userStore'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
+import { Button } from '@/shared/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu'
+import Icon from '@/shared/ui/icon/Icon.vue'
+import { Switch } from '@/shared/ui/switch'
 
 const authStore = useAuthStore()
 const userStore = useUserStore()

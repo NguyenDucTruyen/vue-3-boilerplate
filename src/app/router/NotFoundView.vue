@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Button } from '@/shared/ui/button'
+</script>
+
 <template>
   <div class="error-page flex flex-col items-center justify-center gap-4 mt-10">
     <h1

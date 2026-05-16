@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import AppHeader from '@/app/shell/AppHeader.vue'
+import AppSideBar from '@/app/shell/AppSideBar.vue'
+import AppSideBarMobile from '@/app/shell/SideBar/AppSideBarMobile.vue'
+</script>
+
 <template>
   <div class="flex flex-col h-full justify-between">
     <div

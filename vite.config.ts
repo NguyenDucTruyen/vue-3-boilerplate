@@ -5,7 +5,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import autoprefixer from 'autoprefixer'
 import tailwind from 'tailwindcss'
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
 // https://vite.dev/config/
@@ -25,15 +24,6 @@ export default defineConfig({
     }),
     vue(),
     vueJsx(),
-    Components({
-      dts: true,
-      dirs: [
-        'src/app/shell',
-        'src/features/**/components',
-        'src/shared/components',
-        'src/shared/ui',
-      ],
-    }),
     svgLoader(),
   ],
   resolve: {

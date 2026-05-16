@@ -1,9 +1,11 @@
 <script setup>
 import UserDropdown from '@/features/auth/components/UserDropdown.vue'
+import InputSearch from '@/shared/components/InputSearch.vue'
 import { ROUTES } from '@/shared/constants/routes'
 import { useSidebarStore } from '@/shared/stores/sidebarStore'
 import { useUserStore } from '@/shared/stores/userStore'
 import Button from '@/shared/ui/button/Button.vue'
+import Icon from '@/shared/ui/icon/Icon.vue'
 
 const userStore = useUserStore()
 const sidebarStore = useSidebarStore()

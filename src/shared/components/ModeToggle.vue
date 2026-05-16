@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { type ThemeType, useThemeStore } from '@/shared/stores/themeStore'
 import { Button } from '@/shared/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu'
 
 const themeStore = useThemeStore()
 function setTheme(theme: ThemeType) {

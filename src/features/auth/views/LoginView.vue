@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { CallbackTypes } from 'vue3-google-login'
 import { ROUTES } from '@/shared/constants/routes'
+import { Button } from '@/shared/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card'
+import InputValidator from '@/shared/ui/form/InputValidator.vue'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAsyncState } from '@vueuse/core'
 import { useForm } from 'vee-validate'
@@ -24,8 +27,7 @@ const { isLoading, execute } = useAsyncState(authStore.login, null, {
 const onSubmit = form.handleSubmit(async (values) => {
   await execute(0, values)
 })
-const callback: CallbackTypes.TokenResponseCallback = (response) => {
-  console.log('Access token:', response.access_token)
+const callback: CallbackTypes.TokenResponseCallback = (_response) => {
 }
 </script>
 
