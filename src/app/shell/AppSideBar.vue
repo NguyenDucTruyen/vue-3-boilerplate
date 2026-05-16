@@ -54,7 +54,7 @@ const data = ref({
         @click="$router.push('/')"
       >
         <img
-          src="@/assets/images/Logo_Slooh_Horizontal.png"
+          src="@/assets/images/logo_horizontal.webp"
           alt="Slooh Logo"
           class="h-12 hover:opacity-90 transition-opacity"
         >
@@ -64,7 +64,7 @@ const data = ref({
         @click="$router.push('/')"
       >
         <img
-          src="@/assets/images/Logo_Slooh.png"
+          src="@/assets/images/logo.webp"
           alt="Slooh Logo"
           class="h-12 hover:opacity-90 transition-opacity"
         >

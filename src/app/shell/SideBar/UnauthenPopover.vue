@@ -54,7 +54,7 @@ const props = defineProps({
 
 <style lang="scss">
 .popover-custom {
-  background: url('@/assets/images/Logo_Slooh_Vertical.png') center !important;
+  background: url('@/assets/images/logo.webp') center !important;
   background-size: 60px !important;
   background-repeat: no-repeat !important;
   background-position: top right !important;

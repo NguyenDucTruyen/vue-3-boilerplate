@@ -13,7 +13,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   src: '',
   alt: 'Image',
-  fallbackSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/300px-User-avatar.svg.png',
+  fallbackSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/300px-User-avatar.svg.webp',
   loading: 'lazy',
   class: '',
   aspectRatio: 'auto',
@@ -118,7 +118,7 @@ onMounted(() => {
       class="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-400 text-xs rounded"
     >
       <img
-        src="https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png"
+        src="https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.webp"
         alt="Fallback Image"
         class="w-full h-full object-cover rounded"
       >
