@@ -3,6 +3,7 @@ export const ROUTES = {
   NOT_FOUND: '/notfound',
   PROJECT: '/project',
   AUTH: {
+    ROOT: '/',
     LOGIN: '/login',
     SIGNUP: '/signup',
     FORGOT_PASSWORD: '/forgot-password',
