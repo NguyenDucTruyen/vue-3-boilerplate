@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { CallbackTypes } from 'vue3-google-login'
+import { ROUTES } from '@/shared/constants/routes'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAsyncState } from '@vueuse/core'
 import { useForm } from 'vee-validate'
@@ -42,10 +43,10 @@ const callback: CallbackTypes.TokenResponseCallback = (response) => {
       <CardContent>
         <div class="grid gap-4">
           <div class="grid gap-2">
-            <InputValidator id="email" type="email" label="Email" placeholder="m@gmai.com" name="email" />
+            <InputValidator id="email" type="email" label="Email" placeholder="you@example.com" name="email" />
             <div class="grid gap-2">
-              <InputValidator id="password" type="password" placeholder="Password" label="Password" name="password" />
-              <RouterLink to="/auth/forgot-password" class="ml-auto text-sm underline">
+              <InputValidator id="password" type="password" placeholder="Enter your password" label="Password" name="password" />
+              <RouterLink :to="ROUTES.AUTH.FORGOT_PASSWORD" class="ml-auto text-sm underline">
                 Forgot your password?
               </RouterLink>
             </div>
@@ -59,14 +60,14 @@ const callback: CallbackTypes.TokenResponseCallback = (response) => {
         </div>
         <div class="mt-4 text-center text-sm">
           Don't have an account?
-          <RouterLink to="/auth/signup" class="underline">
+          <RouterLink :to="ROUTES.AUTH.SIGNUP" class="underline">
             Sign up
           </RouterLink>
         </div>
         <Separator label="Or" style-label="bg-transparent" class="my-4" />
         <GoogleLogin :callback="callback" class="w-full" popup-type="TOKEN">
           <Button type="button" class="w-full">
-            <Icon name="IconGoogle" class="w-8 h-8" />
+            <Icon name="IconGoogle" class="w-6 h-6" />
             Login with Google
           </Button>
         </GoogleLogin>

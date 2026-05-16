@@ -1,5 +1,6 @@
 <script setup>
 import UserDropdown from '@/features/auth/components/UserDropdown.vue'
+import { ROUTES } from '@/shared/constants/routes'
 import { useSidebarStore } from '@/shared/stores/sidebarStore'
 import { useUserStore } from '@/shared/stores/userStore'
 import Button from '@/shared/ui/button/Button.vue'
@@ -68,12 +69,12 @@ onMounted(() => {
     <div class="flex">
       <UserDropdown v-if="userStore?.user" />
       <template v-else>
-        <router-link to="/auth/singup">
+        <router-link :to="ROUTES.AUTH.SIGNUP">
           <Button class="rounded-full px-6" variant="ghost">
             Sign up
           </Button>
         </router-link>
-        <router-link to="/auth/login">
+        <router-link :to="ROUTES.AUTH.LOGIN">
           <Button class="rounded-full px-6 bg-foreground">
             Log in
           </Button>

@@ -6,9 +6,8 @@ import SignUpView from './views/SignUpView.vue'
 
 export const authRoutes = [
   {
-    path: '/auth',
+    path: '/',
     component: AuthLayout,
-    meta: { layout: 'auth' },
     children: [
       {
         path: 'login',

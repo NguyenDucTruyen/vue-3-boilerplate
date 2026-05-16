@@ -51,7 +51,7 @@ axiosInstance.interceptors.response.use(
           return Promise.reject(refreshError)
         }
       }
-      else if (!window.location.pathname.includes(ROUTES.AUTH.ROOT)) {
+      else {
         window.location.href = ROUTES.AUTH.LOGIN
       }
     }

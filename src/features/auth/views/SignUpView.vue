@@ -49,7 +49,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       </div>
       <div class="mt-4 text-center text-sm">
         Already have an account?
-        <RouterLink to="/auth/login" class="ml-1 text-balance underline">
+        <RouterLink :to="ROUTES.AUTH.LOGIN" class="underline">
           Login
         </RouterLink>
       </div>

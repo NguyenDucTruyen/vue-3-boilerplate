@@ -4,7 +4,7 @@ import ErrorLayout from '@/app/layouts/ErrorLayout.vue'
 import { authRoutes } from '@/features/auth/routes'
 import { homeRoutes } from '@/features/home/routes'
 import { projectRoutes } from '@/features/projects/routes'
-import { ROUTES } from '@/shared/constants/routes'
+import { LAYOUTS, ROUTES } from '@/shared/constants/routes'
 import { createRouter, createWebHistory } from 'vue-router'
 import { middlewareAuth } from './guards/authGuard'
 import NotFoundView from './NotFoundView.vue'
@@ -16,15 +16,15 @@ const routes = [
     children: [...homeRoutes, ...projectRoutes],
   },
   {
-    path: ROUTES.AUTH.ROOT,
+    path: ROUTES.HOME,
     component: AuthLayout,
-    meta: { layout: 'auth' },
+    meta: { layout: LAYOUTS.AUTH },
     children: [...authRoutes],
   },
   {
     path: ROUTES.NOT_FOUND,
     component: ErrorLayout,
-    meta: { layout: 'error' },
+    meta: { layout: LAYOUTS.ERROR },
     children: [
       {
         path: '',

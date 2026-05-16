@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ROUTES } from '@/shared/constants/routes'
 import { Button } from '@/shared/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
 import { PopoverClose } from 'reka-ui'
@@ -40,7 +41,7 @@ const props = defineProps({
               Không phải bây giờ
             </Button>
           </PopoverClose>
-          <RouterLink to="/auth/login">
+          <RouterLink :to="ROUTES.AUTH.LOGIN">
             <Button class="rounded-full">
               Đăng nhập ngay
             </Button>
