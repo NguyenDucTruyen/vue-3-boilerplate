@@ -1,0 +1,1 @@
+npx lint-staged --verbose --max-arg-length 8000

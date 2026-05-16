@@ -5,6 +5,6 @@ export default antfu({
   typescript: true,
   vue: true,
   rules: {
-    'no-console':'warn'
-  }
+    'no-console': 'warn',
+  },
 })

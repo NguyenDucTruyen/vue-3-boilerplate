@@ -7,8 +7,6 @@ import tailwind from 'tailwindcss'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
 import svgLoader from 'vite-svg-loader'
 // https://vite.dev/config/
 export default defineConfig({
@@ -27,9 +25,16 @@ export default defineConfig({
     }),
     vue(),
     vueJsx(),
-    Components({ dts: true }),
-    Pages(),
-    Layouts({ layoutsDirs: 'src/components/layouts' }),
+    Components({
+      dts: true,
+      dirs: [
+        'src/app/layouts',
+        'src/app/shell',
+        'src/features/**/components',
+        'src/shared/components',
+        'src/shared/ui',
+      ],
+    }),
     svgLoader(),
   ],
   resolve: {
