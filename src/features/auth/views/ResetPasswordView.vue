@@ -7,12 +7,11 @@ import InputValidator from '@/shared/ui/form/InputValidator.vue'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAsyncState } from '@vueuse/core'
 import { useForm } from 'vee-validate'
-import { useAuthStore } from '../stores/authStore'
+import { requestResetPassword } from '../api/authApi'
 import { resetPasswordValidator } from '../validation/auth.validation'
 
 const router = useRouter()
 const route = useRoute()
-const authStore = useAuthStore()
 
 const form = useForm({
   validationSchema: toTypedSchema(resetPasswordValidator),
@@ -22,11 +21,9 @@ const form = useForm({
     confirmPassword: '',
   },
 })
-const { isLoading, execute, error } = useAsyncState(authStore.resetPassword, null, {
+const { isLoading, execute, error } = useAsyncState(requestResetPassword, null, {
   immediate: false,
-  onError: (error) => {
-    Promise.reject(error)
-  },
+  onError: error => Promise.reject(error),
 })
 const onSubmit = form.handleSubmit(async (values) => {
   await execute(0, values)

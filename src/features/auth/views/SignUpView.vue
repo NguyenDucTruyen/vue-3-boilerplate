@@ -5,19 +5,24 @@ import { Button } from '@/shared/ui/button'
 import { CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card'
 import InputValidator from '@/shared/ui/form/InputValidator.vue'
 import { toTypedSchema } from '@vee-validate/zod'
+import { useAsyncState } from '@vueuse/core'
 import { useForm } from 'vee-validate'
-import { useAuthStore } from '../stores/authStore'
+import { apiRegister } from '../api/authApi'
 import { signupValidator } from '../validation/auth.validation'
 
 const router = useRouter()
-const authStore = useAuthStore()
 
 const form = useForm({
   validationSchema: toTypedSchema(signupValidator),
 })
 
+const { execute } = useAsyncState(apiRegister, null, {
+  immediate: false,
+  onError: error => Promise.reject(error),
+})
+
 const onSubmit = form.handleSubmit(async (values) => {
-  await authStore.register(values)
+  await execute(0, values)
   showSuccess('Account created successfully')
   router.push(ROUTES.AUTH.LOGIN)
 })
